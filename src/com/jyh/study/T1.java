@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 
@@ -21,8 +23,15 @@ public class T1 {
 		URLConnection conn = url.openConnection();
 		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String s = "";
+		Pattern p = Pattern.compile("jpeg");
+		
 		while((s=br.readLine())!=null) {
-			System.out.println(s);
+			//System.out.println(s);
+			Matcher m = p.matcher(s);
+			if(m.find()) {
+				String[] str = s.split("\"");
+				System.out.println(str[1]);
+			}
 		}
 	}
 
